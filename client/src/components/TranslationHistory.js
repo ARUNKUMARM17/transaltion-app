@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { db } from './firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Box, Paper } from '@mui/material';
@@ -128,9 +130,17 @@ const DateTypography = styled(Typography)({
     fontStyle: 'italic',
     marginTop: '8px',
 });
+const BackButton = styled(Button)({
+    position: 'absolute',
+    top: '10px',
+    left: '10px',
+    cursor: 'pointer',
+});
+
 
 const TranslationHistory = ({ userId }) => {
     const [history, setHistory] = useState([]);
+    const historyNav = useHistory();
 
     useEffect(() => {
         const fetchHistory = async () => {
@@ -146,6 +156,10 @@ const TranslationHistory = ({ userId }) => {
         };
         fetchHistory();
     }, [userId]);
+        const handleBackClick = () => {
+        historyNav.push('/translation');
+    };
+
 
     return (
         <HistoryContainer>
