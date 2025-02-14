@@ -31,17 +31,17 @@ function App() {
                 {/* Login Route */}
                 <Route path="/login" element={<Login setUser={setUser} />} />
 
-                {/* Protected Routes for authenticated users only */}
-                <Route
-                    path="/"
-                    element={user ? <Translate userId={user.uid} /> : <Navigate to="/login" />}
-                />
-                <Route
-                    path="/history"
-                    element={user ? <TranslationHistory userId={user.uid} /> : <Navigate to="/login" />}
-                />
+               { /* Protected Routes for authenticated users only */}
+                                <Route
+                                    path="/"
+                                    element={user ? <Translate userId={user.uid} /> : <Navigate to="/login" />}
+                                />
+                                <Route
+                                    path="/history"
+                                    element={user ? <TranslationHistory userId={user.uid} /> : <Navigate to="/login" />}
+                                />
 
-                {/* Redirect unknown routes to the main page or login */}
+                                {/* Redirect unknown routes to the main page or login */}
                 <Route path="*" element={<Navigate to={user ? "/" : "/login"} />} />
             </Routes>
         </Router>
