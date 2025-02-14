@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom'; 
 import { db } from './firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Box, Paper } from '@mui/material';
@@ -140,7 +139,7 @@ const BackButton = styled(Button)({
 
 const TranslationHistory = ({ userId }) => {
     const [history, setHistory] = useState([]);
-    const historyNav = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchHistory = async () => {
@@ -156,13 +155,14 @@ const TranslationHistory = ({ userId }) => {
         };
         fetchHistory();
     }, [userId]);
-        const handleBackClick = () => {
-        historyNav.push('/translation');
+   const handleBackClick = () => {
+        navigate('/translation');
     };
 
 
     return (
         <HistoryContainer>
+        <BackButton onClick={handleBackClick}>Back to Translation</BackButton>
             <Typography variant="h4" gutterBottom align="center" color="primary">
                 Translation History
             </Typography>
