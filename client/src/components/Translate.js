@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Select, MenuItem, Typography, Card, Box, CircularProgress, IconButton, Tooltip } from '@mui/material';
 import TranslateIcon from '@mui/icons-material/Translate';
 import LanguageIcon from '@mui/icons-material/Language';
@@ -9,6 +10,8 @@ import { Link } from 'react-router-dom';
 import { db, auth } from './firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 
 
 const languages = {
@@ -161,6 +164,23 @@ const HistoryLink = styled(Link)(() => ({
         color: '#2e3a8c',
     },
 }));
+const BackButton = styled(IconButton)({
+    position: 'absolute',
+    top: '20px',
+    left: '20px',
+    // backgroundColor: '#fff',
+    color: '#3f51b5',
+    // border: '2px solid #3f51b5',
+    // boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
+    padding: '10px',
+    borderRadius: '50%',
+    transition: '0.3s',
+    '&:hover': {
+        backgroundColor: '#3f51b5',
+        color: '#fff',
+    },
+});
+
 
 const Translate = () => {
     const [userId, setUserId] = useState(null);
@@ -169,6 +189,7 @@ const Translate = () => {
     const [originalText, setOriginalText] = useState('');
     const [translatedText, setTranslatedText] = useState('');
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -220,9 +241,18 @@ const Translate = () => {
         setOriginalText(translatedText);
         setTranslatedText('');
     };
+    function handleBackClick() {
+        navigate('/login');
+    }
 
     return (
         <Container>
+            <BackButton onClick={handleBackClick}>
+                <ArrowBackIcon fontSize="large" />
+                Login
+            </BackButton>
+
+
             <StyledCard>
                 <Typography variant="h4" component="h1" gutterBottom color="primary">
                     <TranslateIcon fontSize="large" /> Language Translator

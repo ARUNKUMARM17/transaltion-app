@@ -4,6 +4,7 @@ import { db } from './firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Box, Paper, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 const languages = {
@@ -162,7 +163,9 @@ const TranslationHistory = ({ userId }) => {
 
     return (
         <HistoryContainer>
-        <BackButton onClick={handleBackClick}>Back to Translation</BackButton>
+        <BackButton onClick={handleBackClick}>
+        <ArrowBackIcon fontSize="large" />
+            Back to Translation</BackButton>
             <Typography variant="h4" gutterBottom align="center" color="primary">
                 Translation History
             </Typography>

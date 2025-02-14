@@ -34,7 +34,7 @@ function App() {
                { /* Protected Routes for authenticated users only */}
                                 <Route
                                     path="/"
-                                    element={user ? <Translate userId={user.uid} /> : <Navigate to="/login" />}
+                                    element={<Translate/>}
                                 />
                                 <Route
                                     path="/history"
